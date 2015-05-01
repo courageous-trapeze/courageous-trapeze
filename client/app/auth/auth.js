@@ -1,4 +1,3 @@
-console.log('auth.js running...');
 var app = angular.module('courageousTrapeze.auth', []);
 app.controller('AuthController', ['$scope', 'Auth', function($scope, Auth){
   // var test = Counter();
