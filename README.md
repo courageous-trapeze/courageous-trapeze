@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/courageous-trapeze/courageous-trapeze.png?label=ready&title=Ready)](https://waffle.io/courageous-trapeze/courageous-trapeze)
 # Socialite
 
 Socialite allows you to import your Facebook contacts to schedule text and social communications with your closest contacts.
