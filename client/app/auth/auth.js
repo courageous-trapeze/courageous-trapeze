@@ -2,34 +2,48 @@ console.log('auth.js running...');
 var app = angular.module('courageousTrapeze.auth', []);
 app.controller('AuthController', ['$scope', 'Auth', function($scope, Auth){
   // var test = Counter();
-  $scope.display = 'abcasdfd';
+  $scope.user = {};
+  $scope.user.username = 'default';
+  $scope.user.password = 'testpw';
 
-  $scope.test = function(count){
-    Auth.testGet(count, function(respCount){
-      console.log('$scope.increment() return value:', respCount);
-      $scope.display = 'aaaa';
+  $scope.signin = function(count){
+    Auth.signin(count, function(resp){
+      console.log('signin callback');
+    })
+  };
+
+  $scope.signup = function(count){
+    Auth.signup(count, function(resp){
+      console.log('signup callback');
     })
   };
 
 }]);
 
 app.factory('Auth', function($http){
-  console.log('Auth factory() running...');
-  var testGet = function(count, cb){
-    console.log('Auth factory() testGet() running...');
+  var signup = function(count, cb){
     return $http({
-      method: 'GET',
+      method: 'Post',
       url: '/signup'
     })
     .then(function (resp) {
-      console.log('Auth factory() testGet() response callback running...');
-      console.log('response:', resp);
+      console.log('RESPONSE:', resp)
     });
-    return 44;
+  };
+
+  var signin = function(count, cb){
+    return $http({
+      method: 'Post',
+      url: '/signin'
+    })
+    .then(function (resp) {
+      console.log('RESPONSE:', resp)
+    });
   };
 
   return {
-    testGet: testGet
+    signup: signup,
+    signin: signin
   }
 
 });

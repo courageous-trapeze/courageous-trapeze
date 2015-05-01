@@ -1,3 +1,8 @@
-<div ng-app="courageousTrapeze.auth" ng-controller="AuthController">
-    <h1 ng-click="test(display)"> {{ display }} </h1>
+<div id="signup">
+  <div ng-app="courageousTrapeze.auth" ng-controller="AuthController">
+    <div>Sign-In</div>
+    <div>User____:<input type="text" ng-model="user.username"></div>
+    <div>Password:<input type="password" ng-model="user.password"></div>
+    <button ng-click="signup()">Sign-Up</button>
+  </div>
 </div>
