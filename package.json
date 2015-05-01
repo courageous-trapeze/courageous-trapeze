@@ -1,0 +1,24 @@
+{
+  "name": "courageous-trapeze",
+  "version": "1.0.0",
+  "description": "Courageous Trapeze allows you to import your Google contacts to schedule text and social communications with your closest contacts.",
+  "main": "index.js",
+  "scripts": {
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/onelovelyname/courageous-trapeze.git"
+  },
+  "author": "John Yeglinski, Kevin Huang, Mike Harris, Melanie Gin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/onelovelyname/courageous-trapeze/issues"
+  },
+  "homepage": "https://github.com/onelovelyname/courageous-trapeze",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "express": "^4.12.3",
+    "mongoose": "^4.0.2"
+  }
+}
