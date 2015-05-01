@@ -23,7 +23,7 @@ app.factory('Auth', function($http){
   var signup = function(count, cb){
     return $http({
       method: 'Post',
-      url: '/signup'
+      url: '/api/user/signup'
     })
     .then(function (resp) {
       console.log('RESPONSE:', resp)
@@ -33,7 +33,7 @@ app.factory('Auth', function($http){
   var signin = function(count, cb){
     return $http({
       method: 'Post',
-      url: '/signin'
+      url: '/api/user/signin'
     })
     .then(function (resp) {
       console.log('RESPONSE:', resp)
