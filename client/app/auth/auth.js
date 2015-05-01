@@ -3,8 +3,8 @@ var app = angular.module('courageousTrapeze.auth', []);
 app.controller('AuthController', ['$scope', 'Auth', function($scope, Auth){
   // var test = Counter();
   $scope.user = {};
-  $scope.user.username = 'default';
-  $scope.user.password = 'testpw';
+  $scope.user.username = '';
+  $scope.user.password = '';
 
   $scope.signin = function(count){
     Auth.signin(count, function(resp){
