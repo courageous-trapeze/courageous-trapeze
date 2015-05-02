@@ -18,6 +18,7 @@
   "homepage": "https://github.com/courageous-trapeze/courageous-trapeze",
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^2.9.25",
     "express": "^4.12.3",
     "mongoose": "^4.0.2"
   }
