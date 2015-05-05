@@ -16,6 +16,11 @@ var contactSchema = new mongoose.Schema({
     // validate: [/\(\d{3}\)\d{3}-\d{4}/,
     // 'phone number required to be in (123)456-7890 format'],
     required: true
+  },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   }
 });
 

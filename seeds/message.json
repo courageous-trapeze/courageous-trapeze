@@ -1,0 +1,24 @@
+[
+  {
+      "userId": 1,
+      "contactId": 1,
+      "contactPhone": 8046831201,
+      "text": "fine be an anti-socialite",
+      "date": "Wed Dec 01 2010 00:00:00 GMT-0800 (PST)"
+  },
+  {
+      "userId": 1,
+      "contactId": 2,
+      "contactPhone": 4158060328,
+      "text": "hiyo Kevin, happy non-birthday",
+      "date": "Wed Dec 01 2010 00:00:00 GMT-0800 (PST)"
+  },
+  {
+      "userId": 1,
+      "contactId": 3,
+      "contactPhone": 9254870772,
+      "text": "melanie is the best human being",
+      "date": "Wed Dec 01 2010 00:00:00 GMT-0800 (PST)"
+
+  }
+]

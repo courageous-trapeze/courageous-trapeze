@@ -8,15 +8,16 @@ var app = express();
 
 // preferable to mongoose.createConnection, as we do not need multiple database connections
 // see: http://mongoosejs.com/docs/connections.html
-mongoose.connect('mongodb://localhost/test');
+var mongoURI = process.env.DATABASE_URL || 'mongodb://localhost/courageoustrapezedb';
+mongoose.connect(mongoURI);
 
 var db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
-   console.log('database connection open');
+  console.log('database connection open');
    // add Users and Messages functionality 
- });
+});
 
 middleware(app, express);
 

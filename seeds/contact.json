@@ -1,0 +1,20 @@
+[
+  {
+      "id": 1,
+      "name": "John Yeglinski",
+      "phone": 8046831201,
+      "userId": 1
+  },
+  {
+      "id": 2,
+      "name": "Kevin Huang",
+      "phone": 4158060328,
+      "userId": 1
+  },
+  {
+      "id": 3,
+      "name": "Melanie Gin",
+      "phone": 9254870772,
+      "userId": 1
+  }
+]
