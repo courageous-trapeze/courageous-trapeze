@@ -25,6 +25,17 @@ input {
   margin: 4px;
 }
 
+button {
+  margin: 4px;
+  padding: 4px;
+  height: 25px;
+  border-radius: 3px;
+}
+
+button:focus {
+  outline: 0px;
+}
+
 #signup, #signin {
   width: 210px;
   padding: 10px;
