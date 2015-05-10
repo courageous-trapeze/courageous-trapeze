@@ -3,6 +3,7 @@
 //var Promise = require('bluebird');
 //var Promise = require('mpromise');
 var _ = require('underscore');
+var mongoose = require('mongoose');
 
 // local dependencies
 var Contact = require('./contactModel.js');
@@ -25,7 +26,7 @@ module.exports = {
         googleId: googleId,
         name: contact.name,
         phone: convertPhone(contact.phone),
-        userId: contact.userId
+        userId: mongoose.Types.ObjectId(request.user.userId)
       };
     });
     console.log('contactsReceived:', contactsReceived);
@@ -61,7 +62,7 @@ module.exports = {
   showContacts: function (request, response) {
   // logic to return all Contacts after server receives GET request
   // check with Mike how sessions are being created
-    Contact.find({ userId: 3 }, function (error, docs) {
+    Contact.find({userId: request.user.userId}, function (error, docs) {
       if (error) {
         response.status(500).end('Error: Could not find contacts');
       } else {

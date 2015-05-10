@@ -1,3 +1,25 @@
-<div id="contacts">
-  This is the contacts view
+<nav>
+  <a href="/#/messages">Messages</a>
+  <a href="/#/contacts">Contacts</a>
+  <a href="/#/add-contact">Add Contact</a>
+  <a href="/#/" ng-click="signout()">Sign out</a>
+</nav>
+
+<div id="contacts" ng-init="getAllContacts()">
+  <h2>Contacts</h2>
+  <img src="assets/spiffygif_46x46.gif" alt="Loading" ng-show="loading">
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+    <tbody ng-show="contacts">
+      <tr ng-repeat="contact in contacts | orderBy: 'name'">
+        <td>{{ contact.name }}</td>
+        <td>{{ contact.phone }} </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

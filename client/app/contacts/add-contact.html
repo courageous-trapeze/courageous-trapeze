@@ -1,0 +1,24 @@
+<nav>
+  <a href="/#/messages">Messages</a>
+  <a href="/#/contacts">Contacts</a>
+  <a href="/#/add-contact">Add Contact</a>
+  <a href="/#/signout" ng-click="Auth.signout()">Sign out</a>
+</nav>
+
+<div id="add-contact">
+  <script src="https://apis.google.com/js/client.js"></script>
+  <h2>Add Contact</h2>
+  <button ng-click="importGoogleContacts()">Import Google Contacts</button> <img src="assets/spiffygif_46x46.gif" alt="Loading" ng-show="loading">
+  <form name="newContactForm" id="newContactForm" ng-submit="addNewContact()">
+    <input type="text" name="name" id="name" ng-model="name" placeholder="Name"><br>
+    <input type="tel" name="phone" id="phone" ng-model="phone" placeholder="Mobile Phone"><br>
+    <button type="submit">Add</button>
+  </form>
+  <div ng-show="newContacts">
+    <h3>Contacts added:</h3>
+    <div ng-repeat="contact in newContacts">
+      Name: {{ contact.name }}<br>
+      Phone: {{ contact.phone }}
+    </div>
+  </div>
+</div>

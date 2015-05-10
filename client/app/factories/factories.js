@@ -54,27 +54,131 @@ angular.module('courageousTrapeze.factories', [])
   };
 }])
 
-.factory('Contacts', ['$http', function($http) {
+.factory('Contacts', ['$window', '$http', function($window, $http) {
+  var apiKey = 'AIzaSyAV41kUUlEkX76SX5rCvqBjnYBFps5NTVU';
+  var clientId = '268795846253-ki9ir03vivk01jnvgheuhpbr78bguen8.apps.googleusercontent.com';
+  var scope = 'https://www.google.com/m8/feeds';
+  var myContactsGroupId;
+  var _contacts = [];
+
   var getAll = function() {
+    return _contacts;
+  };
+
+  var setContacts = function(contacts) {
+    _contacts = contacts;
+  };
+  
+  var getGoogleMyContactsGroup = function(authResult) {
+    return new Promise(function(resolve, reject) {
+      $http.jsonp(scope + '/groups/default/full', {
+        params: {
+          alt: 'json-in-script',
+          access_token: authResult.access_token,
+          callback: 'JSON_CALLBACK',
+          'max-results': 500,
+          showdeleted: false,
+          v: '3.0'
+        }
+      })
+      .success(function(data) {
+        angular.forEach(data.feed.entry, function(group) {
+          if (group.gContact$systemGroup && group.gContact$systemGroup.id.toLowerCase() === 'contacts') {
+            myContactsGroupId = group.id.$t;
+          }
+        });
+        resolve(authResult);
+      })
+      .error(function(error) {
+        console.error(error);
+        reject(error);
+      });
+    });
+  };
+
+  var getGoogleMyContacts = function(authResult) {
+    return new Promise(function(resolve, reject) {
+      $http.jsonp(scope + '/contacts/default/full', {
+        params: {
+          alt: 'json-in-script',
+          access_token: authResult.access_token,
+          callback: 'JSON_CALLBACK',
+          group: myContactsGroupId,
+          'max-results': 1000,
+          orderby: 'lastmodified',
+          showdeleted: false,
+          sortorder: 'descending',
+          v: '3.0'
+        }
+      })
+      .success(function(data) {
+        resolve(data.feed.entry);
+      })
+      .error(function(data) {
+        reject(data);
+      });
+    });
+  };
+
+  var getGoogleAuth = function() {
+    return new Promise(function(resolve, reject) {
+      $window.gapi.client.setApiKey(apiKey);
+      $window.gapi.auth.authorize({client_id: clientId, scope: scope, immediate: false}, function(authResult) {
+        if (authResult && !authResult.error) {
+          resolve(authResult);
+        } else {
+          reject();
+        }
+      });
+    });
+  };
+
+  var importFromGoogle = function() {
+    return new Promise(function(resolve, reject) {
+      getGoogleAuth().then(getGoogleMyContactsGroup).then(getGoogleMyContacts).then(function(contacts) {
+        console.log('Results from Google', contacts);
+        resolve(contacts);
+      }).catch(function(error) {
+        reject(error);
+      });
+    });
+  };
+
+  var fetch = function() {
     return $http({
       method: 'GET',
       url: '/api/contacts'
     })
-    .then(function(res) {
-      return res.data;
+    .then(function(response) {
+      setContacts(response.data);
+      return getAll();
     });
   };
 
-  var addContact = function(message) {
+  var addContact = function(contacts) {
     return $http({
       method: 'POST',
       url: '/api/contacts',
-      data: message
+      headers: {'Content-Type': 'application/json'},
+      data: contacts,
+      responseType: 'json'
+    }).success(function(data) {
+      if (data) {
+        data.forEach(function(contact) {
+          _contacts.push(contact);
+        });
+      }
+      return data;
+    }).error(function(data) {
+      console.error('addContact failed', data);
     });
   };
 
   return {
+    importFromGoogle: importFromGoogle,
+    fetch: fetch,
     getAll: getAll,
+    setContacts: setContacts,
     addContact: addContact
   };
 }])
@@ -85,8 +189,8 @@ angular.module('courageousTrapeze.factories', [])
       method: 'GET',
       url: '/api/messages'
     })
-    .then(function(res) {
-      return res.data;
+    .then(function(response) {
+      return response.data;
     });
   };
 
