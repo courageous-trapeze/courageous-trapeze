@@ -29,7 +29,7 @@ angular.module('courageousTrapeze.factories', [])
       data: user
     })
     .then(function(res) {
-      return res.data.token;
+      return res.headers().token;
     });
   };
 
@@ -40,7 +40,8 @@ angular.module('courageousTrapeze.factories', [])
       data: user
     })
     .then(function(res) {
-      return res.data.token;
+      //if (typeof res.data.redirect == 'string') window.location = res.data.redirect;
+      return res.headers().token;
     });
   };
 
