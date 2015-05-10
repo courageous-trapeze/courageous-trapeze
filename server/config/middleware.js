@@ -25,14 +25,6 @@ module.exports = function (app, express) {
   messageRoutes(messageRouter);
   contactRoutes(contactRouter);
 
-  // see: http://expressjs.com/api.html#app.use
-
-  app.use(express.static(__dirname + '/../../client'));
-  // see: http://expressjs.com/api.html re: app.use()
-  app.use(bodyParser.urlencoded({extended: true}));
-  app.use(bodyParser.json());
-
-  // app.use('/api/users', authUtil.decodeTokenAttachToReq);
   app.use('/api/messages', authUtil.decodeTokenAttachToReq);
   app.use('/api/contacts', authUtil.decodeTokenAttachToReq);
 

@@ -1,36 +1,36 @@
 angular.module('courageousTrapeze.auth', [])
 
-.controller('AuthController', ['$scope', 'Auth', function($scope, Auth) {
+.controller('AuthController', ['$scope', '$location', 'Auth', function($scope, $location, Auth) {
   $scope.user = {};
-  $scope.user.username = '';
-  $scope.user.password = '';
 
   $scope.signin = function(){
     Auth.signin($scope.user)
-    .then(function(token){
-      localStorage.setItem("courageousTrapeze", token);
+    .success(function(data){
+      window.localStorage.setItem('courageousTrapeze', data.token);
+      $location.path('/messages');
     })
-    .catch(function(err){
+    .error(function(err){
       console.error(err);
     });
   };
 
   $scope.signup = function(){
     Auth.signup($scope.user)
-    .then(function(token){
-      localStorage.setItem("courageousTrapeze", token);
+    .success(function(data){
+      window.localStorage.setItem('courageousTrapeze', data.token);
+      $location.path('/messages');
     })
-    .catch(function(err){
+    .error(function(err){
       console.error(err);
     });
   };
 
   $scope.signout = function(){
-    Auth.signout($scope.user);
+    Auth.signout();
   };
 
   $scope.isAuth = function(){
-    return Auth.isAuth($scope.user);
+    return Auth.isAuth();
   };
 
 }]);
