@@ -10,7 +10,6 @@ angular.module('courageousTrapeze.factories', [])
       if (jwt) {
         object.headers['x-access-token'] = jwt;
       }
-      object.headers['Allow-Control-Allow-Origin'] = '*';
       return object;
     }
   };
@@ -27,9 +26,6 @@ angular.module('courageousTrapeze.factories', [])
       method: 'POST',
       url: '/api/users/signin',
       data: user
-    })
-    .then(function(res) {
-      return res.data.token;
     });
   };
 
@@ -38,9 +34,6 @@ angular.module('courageousTrapeze.factories', [])
       method: 'POST',
       url: '/api/users/signup',
       data: user
-    })
-    .then(function(res) {
-      return res.data.token;
     });
   };
 

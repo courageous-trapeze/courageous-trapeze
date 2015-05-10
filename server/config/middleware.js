@@ -1,11 +1,12 @@
 'use strict';
 var bodyParser = require('body-parser');
-
-var userRoutes = require('../users/userRoutes.js');
-var messageRoutes = require('../messages/messageRoutes.js');
-var contactRoutes = require('../contacts/contactRoutes.js');
+var authUtil = require('./authUtil.js');
 
 module.exports = function (app, express) {
+
+  var userRoutes = require('../users/userRoutes.js');
+  var messageRoutes = require('../messages/messageRoutes.js');
+  var contactRoutes = require('../contacts/contactRoutes.js');
 
   // instantiate express Routers for User, Message, and Contact 
   // see: http://expressjs.com/guide/routing.html
@@ -24,7 +25,9 @@ module.exports = function (app, express) {
   messageRoutes(messageRouter);
   contactRoutes(contactRouter);
 
-  // see: http://expressjs.com/api.html#app.use
+  app.use('/api/messages', authUtil.decodeTokenAttachToReq);
+  app.use('/api/contacts', authUtil.decodeTokenAttachToReq);
+
   app.use('/api/users', userRouter);
   app.use('/api/messages', messageRouter);
   app.use('/api/contacts', contactRouter);
