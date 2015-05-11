@@ -1,3 +1,18 @@
+<nav>
+  <a href="/#/messages">Messages</a>
+  <a href="/#/contacts">Contacts</a>
+  <a href="/#/" ng-click="signout()">Sign out</a>
+</nav>
+
 <div id="messages">
-  This is the messages view
+  <button class="scheduleMessagesBtn" onclick="location.href='/#/schedule'">Schedule Messages</button>
+  <h2>Messages</h2>
+  <img src="assets/spiffygif_46x46.gif" alt="Loading" ng-show="loading">
+  <div class="message" ng-repeat="message in messages | orderBy: 'date'">
+    <div class="contactName">{{ message.contactName }}</div>
+    <div class="text">{{ message.text }}</div>
+    <div class="footer">
+      <span class="date">{{ message.date | date : 'MMM d, yyyy h:mm a' }}</span>  | <span class="status">{{ message.status }}</span>
+    </div>
+  </div>
 </div>

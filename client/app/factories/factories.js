@@ -184,7 +184,7 @@ angular.module('courageousTrapeze.factories', [])
 }])
 
 .factory('Messages', ['$http', function($http) {
-  var getAll = function() {
+  var fetch = function() {
     return $http({
       method: 'GET',
       url: '/api/messages'
@@ -203,7 +203,7 @@ angular.module('courageousTrapeze.factories', [])
   };
 
   return {
-    getAll: getAll,
+    fetch: fetch,
     addMessage: addMessage
   };
 }]);

@@ -58,7 +58,7 @@ angular.module('courageousTrapeze', [
   // if the intended route requires authentication, 
   // check for a token in localStorage and send that token to the server
   // to verify if it is a real user and the token hasn't expired
-  // if it's not valid, then redirect to /signin
+  // if it's not valid, then redirect to /
   $rootScope.$on('$routeChangeStart', function(evt, next) {
     if (next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
       $location.path('/');
