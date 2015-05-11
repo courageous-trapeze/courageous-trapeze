@@ -1,7 +1,7 @@
 'use strict';
 var schedule = angular.module('courageousTrapeze.schedule', []);
 
-schedule.controller('ScheduleController', ['$scope', 'Messages', 'Contacts', '$document', function ($scope, Messages, Contacts, $document) {
+schedule.controller('ScheduleController', ['$scope', 'Messages', 'Contacts', function ($scope, Messages, Contacts) {
   $scope.message = {
     contactId: '',
     text: '',
@@ -18,29 +18,29 @@ schedule.controller('ScheduleController', ['$scope', 'Messages', 'Contacts', '$d
     $scope.notification = '';
   });
 
-  $scope.setContact = function (contact, $event) {
-    $scope.message.contactId = contact._id;
-    $event.target.classList.toggle('selectedContact');
+  $scope.setContact = function (contact) {
+    if (contact) {
+      $scope.message.contactId = contact._id;
+    } else {
+      $scope.message.contactId = '';
+    }
   };
+  
   $scope.addMessage = function (message) {
     $scope.loading = true;
 
     Messages.addMessage(message)
-    .success(function () {
-      $scope.message.contactId = '';
-      $scope.message.text = '';
-      $scope.message.date = '';
-      $scope.loading = false;
-      var result = document.getElementsByClassName('selectedContact');
-      angular.element(result).removeClass('selectedContact');
-      $scope.notification = 'Good work, your message is scheduled!';
-    })
-    .error(function () {
-      $scope.loading = false;
-    });
+      .success(function () {
+        $scope.message.contactId = '';
+        $scope.message.text = '';
+        $scope.message.date = '';
+        $scope.loading = false;
+        $scope.contact = '';
+        $scope.notification = 'Good work, your message is scheduled!';
+      })
+      .error(function () {
+        $scope.loading = false;
+      });
   };
 
 }]);
-
-
-
